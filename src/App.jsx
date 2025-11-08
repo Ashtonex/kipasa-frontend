@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getSession, login, uploadProduct, getAllProducts, deleteProduct, updateProduct } from './utils/appwrite';
 import Navbar from './components/Navbar';
