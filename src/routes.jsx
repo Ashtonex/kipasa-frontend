@@ -8,6 +8,7 @@ import Checkout from './pages/Checkout.jsx';
 import Confirm from './pages/Confirm.jsx';
 import AdminLogin from './pages/AdminLogin.jsx';
 import AdminBanners from './pages/AdminBanners.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 export default function AppRoutes() {
   return (
