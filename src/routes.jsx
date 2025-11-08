@@ -20,6 +20,7 @@ export default function AppRoutes() {
         <Route path="/confirm" element={<Confirm />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-banners" element={<AdminBanners />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
