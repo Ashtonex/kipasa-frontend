@@ -2,12 +2,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './routes.jsx'; // ✅ Make sure this path is correct
+import App from './App.jsx'; // ✅ Correct import
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    
+      <App /> {/* ✅ Replace AppRoutes with App */}
+    
   </React.StrictMode>
 );

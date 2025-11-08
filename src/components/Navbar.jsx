@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../styles/global.css';
 import logo from '../assets/logo.svg';
@@ -8,23 +8,40 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    account.getSession('current')
-      .then(() => setIsLoggedIn(true))
-      .catch(() => setIsLoggedIn(false));
+    const checkSession = async () => {
+      try {
+        const session = await account.getSession('current');
+        if (session && session.userId) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch {
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkSession();
   }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (search.trim()) {
-      window.location.href = `/store?search=${encodeURIComponent(search.trim())}`;
+      navigate(`/store?search=${encodeURIComponent(search.trim())}`);
     }
   };
 
   const handleLogout = async () => {
-    await account.deleteSession('current');
-    window.location.href = '/admin-login';
+    try {
+      await account.deleteSession('current');
+      setIsLoggedIn(false);
+      navigate('/admin-login');
+    } catch (err) {
+      console.error('Logout failed:', err);
+    }
   };
 
   return (
