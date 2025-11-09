@@ -6,7 +6,15 @@ import Footer from './components/Footer';
 import ProductCard from './components/ProductCard';
 import BannerCarousel from './components/BannerCarousel';
 import TrendingProducts from './components/TrendingProducts';
-
+import { createCheckoutSession } from './utils/stripe';
+import { getBanners } from './utils/appwrite'; // ✅ adjust path if needed
+import { updateBanner } from './utils/appwrite';
+import './styles/global.css';
+import './styles/home.css';
+import './styles/footer.css';
+import './styles/navbar.css';
+import './styles/admin-login.css';
+import './styles/store.css';
 
 //Navbar and Footer
 function Layout({ children }) {
@@ -170,16 +178,23 @@ const categories = [
 }
 
 //Checkout
- function Checkout() {
+function Checkout() {
   useEffect(() => {
-    createCheckoutSession();
+    const redirectToStripe = async () => {
+      try {
+        const session = await createCheckoutSession();
+        if (session?.url) {
+          window.location.href = session.url;
+        }
+      } catch (err) {
+        console.error('Stripe error:', err);
+      }
+    };
+
+    redirectToStripe();
   }, []);
 
-  return (
-    <div className="container">
-      <h2>Redirecting to payment...</h2>
-    </div>
-  );
+  return <div className="container">Redirecting to payment...</div>;
 }
 
 //Confirm
@@ -193,7 +208,7 @@ function Confirm() {
 }
 
 //Admin Login
- function AdminLogin() {
+function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -211,38 +226,49 @@ function Confirm() {
 
   return (
     <div className="login-page">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleLogin} className="login-form">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Login</button>
-        {error && <p className="error">{error}</p>}
-      </form>
-    </div>
-  );
-
-
-  return (
-    <div className="login-page">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleLogin} className="login-form">
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-        <button type="submit">Login</button>
-        {error && <p className="error">{error}</p>}
-      </form>
+      <div className="login-container">
+        <div className="admin-badge">ADMIN PORTAL</div>
+        <div className="login-header">
+          <h2>Admin Login</h2>
+          <p className="login-subtitle">Access your store dashboard</p>
+        </div>
+        
+        <span className="security-notice">🔒 Secure Admin Access</span>
+        
+        <form onSubmit={handleLogin} className="login-form">
+          <div className="form-group">
+            <label htmlFor="email">Admin Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your admin email"
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          
+          <button type="submit">Access Dashboard</button>
+          
+          {error && (
+            <div className="error">
+              {error}
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }

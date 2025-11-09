@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../styles/global.css';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 import { account } from '../utils/appwrite';
 
 export default function Navbar() {
@@ -14,17 +14,30 @@ export default function Navbar() {
     const checkSession = async () => {
       try {
         const session = await account.getSession('current');
-        if (session && session.userId) {
-          setIsLoggedIn(true);
-        } else {
-          setIsLoggedIn(false);
-        }
+        setIsLoggedIn(!!session?.userId);
       } catch {
         setIsLoggedIn(false);
       }
     };
 
     checkSession();
+  }, []);
+
+  
+
+  // 🔁 Shrink navbar on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('shrink');
+      } else {
+        navbar.classList.remove('shrink');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleSearch = (e) => {
@@ -45,38 +58,40 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <Link to="/" className="logo">
-        <img src={logo} alt="Kipasa Logo" className="logo-img" />
-      </Link>
+    <>
+      <nav className="navbar">
+        <Link to="/" className="logo">
+          <img src={logo} alt="Kipasa Logo" className="logo-img" />
+        </Link>
 
-      <form className="search-form" onSubmit={handleSearch}>
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button type="submit">🔍</button>
-      </form>
+        <form className="search-form" onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button type="submit">🔍</button>
+        </form>
 
-      <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-        ☰
-      </button>
+        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+          ☰
+        </button>
 
-      <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-        <Link to="/store">Store</Link>
-        {isLoggedIn ? (
-          <>
-            <Link to="/admin">Dashboard</Link>
-            <Link to="/admin-banners">Banners</Link>
-            <span className="admin-greeting">Welcome, admin</span>
-            <button className="btn logout" onClick={handleLogout}>Logout</button>
-          </>
-        ) : (
-          <Link to="/admin-login">Admin</Link>
-        )}
-      </div>
-    </nav>
+        <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+          <Link to="/store">Store</Link>
+          {isLoggedIn ? (
+            <>
+              <Link to="/admin">Dashboard</Link>
+              <Link to="/admin-banners">Banners</Link>
+              <span className="admin-greeting">Welcome, Carrots</span>
+              <button className="btn logout" onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <Link to="/admin-login">Admin</Link>
+          )}
+        </div>
+      </nav>
+    </>
   );
 }

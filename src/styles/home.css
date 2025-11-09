@@ -1,0 +1,362 @@
+/* Home wrapper - Enhanced with professional black gradient */
+.home {
+  padding: 2rem;
+  background: linear-gradient(135deg, 
+    #0c0c0c 0%, 
+    #1a1a1a 25%, 
+    #2d2d2d 50%, 
+    #1a1a1a 75%, 
+    #0c0c0c 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: #f8f9fa;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Animated background gradient */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Subtle texture overlay */
+.home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Banner Carousel - Enhanced for dark theme */
+.home .banner-carousel {
+  margin-bottom: 3rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Tagline Section - Premium dark theme */
+.tagline {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.tagline h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.tagline p {
+  font-size: 1.2rem;
+  color: #adb5bd;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+/* Category Grid - Premium store cards */
+.tagline .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.tagline .card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #f8f9fa;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tagline .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.1), 
+    transparent);
+  transition: left 0.6s ease;
+}
+
+.tagline .card:hover::before {
+  left: 100%;
+}
+
+.tagline .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(120, 119, 198, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.tagline .card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+/* Trending Section - Professional store layout */
+.trending {
+  margin-top: 2rem;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.trending h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.trending h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, #7877c6, #ffffff);
+  border-radius: 2px;
+}
+
+/* Product Grid - Store-style layout */
+.trending .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+/* Product Card - Premium store product cards */
+.trending .card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.trending .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #7877c6, #ffffff);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.trending .card:hover::before {
+  transform: scaleX(1);
+}
+
+.trending .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 0 25px rgba(120, 119, 198, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.trending .card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.trending .card:hover img {
+  transform: scale(1.05);
+}
+
+.trending .card p {
+  font-size: 1rem;
+  color: #adb5bd;
+  margin-bottom: 0.5rem;
+}
+
+.trending .card p:first-of-type {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.trending .card p:nth-child(3) {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #7877c6;
+}
+
+.trending .card p:last-of-type {
+  font-size: 0.9rem;
+  color: #6c757d;
+  background: rgba(120, 119, 198, 0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  display: inline-block;
+  border: 1px solid rgba(120, 119, 198, 0.3);
+}
+
+/* Banner carousel - Keep existing functionality */
+.banner-carousel {
+  position: relative;
+}
+
+.banner-carousel > a + * {
+  display: none;
+}
+
+.banner-carousel > *:not(a) {
+  display: none;
+}
+
+/* Store-like section headers */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: #adb5bd;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Responsive - Enhanced for dark theme */
+@media (max-width: 768px) {
+  .home {
+    padding: 1rem;
+    background: linear-gradient(135deg, #0c0c0c, #1a1a1a, #2d2d2d);
+  }
+  
+  .tagline h1 {
+    font-size: 2rem;
+  }
+
+  .tagline p {
+    font-size: 1rem;
+  }
+
+  .trending h2 {
+    font-size: 1.6rem;
+  }
+
+  .tagline .grid,
+  .trending .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tagline,
+  .trending {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Add subtle entrance animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tagline,
+.trending {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Professional store badge effect */
+.trending .card::after {
+  content: '🛒';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(120, 119, 198, 0.9);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.trending .card:hover::after {
+  opacity: 1;
+}
